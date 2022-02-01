@@ -36,7 +36,7 @@ class Example(QMainWindow, Ui_MainWindow):
             'X                     X',
             'X         XXX    C    X',
             'X    C     C    XXX   X',
-            'X   XXX   XXX X XXX   X',
+            'X   XXX   XXX   XXX   X',
             'XXXXXXXXXXXXXXXXXXXXXXX'
         ]
 
@@ -82,7 +82,6 @@ class Example(QMainWindow, Ui_MainWindow):
         que = f"INSERT INTO scoreboard VALUES ({self.name}, {score})"
         cur.execute(que)
         self.con.commit()
-
 
     def update_result(self):
         cur = self.con.cursor()

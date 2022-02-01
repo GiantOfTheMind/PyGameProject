@@ -77,7 +77,6 @@ class Level:
         if pygame.sprite.spritecollide(player, self.coins, True):
             self.score += 100
 
-
     def exit_collision(self):
         player = self.player.sprite
 
@@ -104,8 +103,4 @@ class Level:
         if self.exit_collision():
             return False, self.score
         return True, self.score
-
-
-
-
 
