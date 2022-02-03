@@ -16,6 +16,8 @@ class Level:
 
         self.score = 0
 
+        self.money_collect_sound = pygame.mixer.Sound('moneycollect.ogg')
+
     def setup_level(self, layout):
         self.tiles = pygame.sprite.Group()
         self.coins = pygame.sprite.Group()
@@ -75,6 +77,7 @@ class Level:
         player = self.player.sprite
 
         if pygame.sprite.spritecollide(player, self.coins, True):
+            self.money_collect_sound.play()
             self.score += 100
 
     def exit_collision(self):

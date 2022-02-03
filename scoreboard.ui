@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>565</width>
-    <height>652</height>
+    <height>648</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -54,7 +54,7 @@
      <rect>
       <x>50</x>
       <y>80</y>
-      <width>281</width>
+      <width>201</width>
       <height>21</height>
      </rect>
     </property>
@@ -62,9 +62,9 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>370</x>
       <y>50</y>
-      <width>181</width>
+      <width>151</width>
       <height>51</height>
      </rect>
     </property>
@@ -76,9 +76,9 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>160</y>
+      <y>200</y>
       <width>471</width>
-      <height>431</height>
+      <height>381</height>
      </rect>
     </property>
    </widget>
@@ -86,7 +86,7 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>130</y>
+      <y>170</y>
       <width>121</width>
       <height>16</height>
      </rect>
@@ -99,7 +99,7 @@
     <property name="geometry">
      <rect>
       <x>340</x>
-      <y>130</y>
+      <y>170</y>
       <width>181</width>
       <height>23</height>
      </rect>
@@ -107,6 +107,52 @@
     <property name="text">
      <string>Обновить</string>
     </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>50</y>
+      <width>141</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Выберите уровень:</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>80</y>
+      <width>77</width>
+      <height>84</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_4">
+     <item>
+      <widget class="QRadioButton" name="radioButton">
+       <property name="text">
+        <string>Уровень 1</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioButton_2">
+       <property name="text">
+        <string>Уровень 2</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioButton_3">
+       <property name="text">
+        <string>Уровень 3</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

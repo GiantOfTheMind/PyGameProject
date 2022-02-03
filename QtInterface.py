@@ -13,6 +13,7 @@ class Example(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.level_number = 1
         self.con = sqlite3.connect("game_db.sqlite")
         # Кнопки для оценок
         self.pushButton.clicked.connect(self.start_game)
@@ -20,8 +21,6 @@ class Example(QMainWindow, Ui_MainWindow):
 
     def start_game(self):
         self.name = self.lineEdit.text()
-
-        # игровой цикл
 
         level_map = [
             'XXXXXXXXXXXXXXXXXXXXXXX',
@@ -40,6 +39,74 @@ class Example(QMainWindow, Ui_MainWindow):
             'XXXXXXXXXXXXXXXXXXXXXXX'
         ]
 
+        level_map_1 = [
+            'XXXXXXXXXXXXXXXXXXXXXXX',
+            'X         XXX         X',
+            'X   C      E      C   X',
+            'X  XXXX         XXXX  X',
+            'X          C          X',
+            'X         XXX       C X',
+            'X        XXXXX        X',
+            'X P                   X',
+            'XXXX   XXX   XXX   XXXX',
+            'X                     X',
+            'X         XXX    C    X',
+            'X    C     C    XXX   X',
+            'X   XXX   XXX   XXX   X',
+            'XXXXXXXXXXXXXXXXXXXXXXX'
+        ]
+
+        level_map_2 = [
+            'XXXXXXXXXXXXXXXXXXXXXXX',
+            'X         C         C X',
+            'X         C           X',
+            'X     XXXXXXXXXXX     X',
+            'X     C               X',
+            'X               C     X',
+            'X     XXXXXXXXXXX     X',
+            'X          C          X',
+            'X                     X',
+            'X     X    C    X     X',
+            'X     X         X     X',
+            'X     X    E    X     X',
+            'X  P  X         X     X',
+            'XXXXXXXXXXXXXXXXXXXXXXX'
+        ]
+
+        level_map_3 = [
+            'XXXXXXXXXXXXXXXXXXXXXXX',
+            'X                     X',
+            'X                 E   X',
+            'X    C          XXXX  X',
+            'X   XXXX              X',
+            'X                     X',
+            'X          C          X',
+            'X    C    XXX         X',
+            'X   XXX          C    X',
+            'X                     X',
+            'X                C    X',
+            'X    C     C    XXX   X',
+            'X P XXX   XXX   XXX   X',
+            'XXXXXXXXXXXXXXXXXXXXXXX'
+        ]
+
+        if self.buttonGroup.checkedButton().text() == "Уровень 1":
+            level_map = level_map_1
+            self.level_number = 1
+        elif self.buttonGroup.checkedButton().text() == "Уровень 2":
+            level_map = level_map_2
+            self.level_number = 2
+        elif self.buttonGroup.checkedButton().text() == "Уровень 3":
+            level_map = level_map_3
+            self.level_number = 3
+
+
+
+
+        # игровой цикл
+
+
+
         title_size = 64
         screen_width = len(level_map[0]) * title_size
         screen_height = len(level_map) * title_size
@@ -49,6 +116,9 @@ class Example(QMainWindow, Ui_MainWindow):
         screen = pygame.display.set_mode(size)
         clock = pygame.time.Clock()
         FPS = 60
+
+        pygame.mixer.music.load('soundtrack.mp3')
+        pygame.mixer.music.play(-1)
 
         level = Level(level_map, screen)
 
@@ -76,10 +146,21 @@ class Example(QMainWindow, Ui_MainWindow):
             pygame.display.flip()
             clock.tick(FPS)
 
+        pygame.mixer.music.stop()
         pygame.quit()
 
         cur = self.con.cursor()
-        que = f"INSERT INTO scoreboard VALUES ({self.name}, {score})"
+
+        result = cur.execute("SELECT name, score, level FROM scoreboard"
+                             " WHERE name=? AND level=?",
+                             (self.name, self.level_number)).fetchall()
+        if not result:
+            que = f"INSERT INTO scoreboard VALUES ('{self.name}', {score}, {self.level_number})"
+        else:
+            que = f"UPDATE scoreboard " \
+                  f"SET score = {score}, " \
+                  f"WHERE name = '{self.name}' AND level = {self.level_number}"
+
         cur.execute(que)
         self.con.commit()
 
